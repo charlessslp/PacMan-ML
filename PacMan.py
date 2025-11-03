@@ -165,7 +165,7 @@ def show_video_of_model(agent, env_name):
         action = agent.act(state)
         state, reward, done, _, _ = env.step(action)
     env.close()
-    imageio.mimsave('video.mp4', frames, fps=30)
+    imageio.mimsave('video.mp4', frames, fps=30, macro_block_size=None)
 
 show_video_of_model(agent, 'MsPacmanNoFrameskip-v4') # The MsPacman environment was renamed 'MsPacmanNoFrameskip-v4'
 
@@ -228,19 +228,23 @@ epsilong_decay_value = 0.995
 epsilon = epsilon_starting_value
 scores_on_100_episodes = deque(maxlen = 100)
 
+
+
 frames = []
 print('\nComputing video episode 0')
 
-for episode in range(0, 5):
+for episode in range(0, 1):
     state, _ = env.reset()
     frames = compute_video_of_model(agent, 'MsPacmanNoFrameskip-v4', frames)
     video_name = f'video000.mp4'
     complete_path = os.path.join(videos_folder, video_name)
     
-imageio.mimsave(complete_path, frames, fps=30)
+imageio.mimsave(complete_path, frames, fps=30, macro_block_size=None)
 frames = []
 
 print('\nEnd of Computing video episode 0')
+
+
 
 for episode in range(1, number_episodes + 1):
   state, _ = env.reset()
@@ -263,7 +267,7 @@ for episode in range(1, number_episodes + 1):
   if episode % 20 == 0:
     video_name = f'video{episode}.mp4'
     complete_path = os.path.join(videos_folder, video_name)
-    imageio.mimsave(complete_path, frames, fps=30)
+    imageio.mimsave(complete_path, frames, fps=30, macro_block_size=None)
     frames = []
   
   if np.mean(scores_on_100_episodes) >= 700.0:
