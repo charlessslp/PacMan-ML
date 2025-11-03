@@ -4,7 +4,7 @@ Convolutional Newral Network that learns to play PacMan by looking at the image 
 
 
 //IMPORTANT: In initialize.bat, change "set PATH..." to point to the swigwin folder. If not in repo, download the swingin folder from https://swig.org/. 
-
+what?
 
 //install py 3.11 if not existing
 
