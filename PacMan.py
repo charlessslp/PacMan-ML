@@ -38,7 +38,7 @@ class Network(nn.Module):
     
 import ale_py
 import gymnasium as gym
-env = gym.make('MsPacmanNoFrameskip-v0', full_action_space = False) # The MsPacman environment was renamed 'MsPacmanNoFrameskip-v0'
+env = gym.make('MsPacmanNoFrameskip-v4', full_action_space = False) # The MsPacman environment was renamed 'MsPacmanNoFrameskip-v4'
 state_shape = env.observation_space.shape
 state_size = env.observation_space.shape[0]
 number_actions = env.action_space.n
@@ -167,7 +167,7 @@ def show_video_of_model(agent, env_name):
     env.close()
     imageio.mimsave('video.mp4', frames, fps=30)
 
-show_video_of_model(agent, 'MsPacmanNoFrameskip-v0') # The MsPacman environment was renamed 'MsPacmanNoFrameskip-v0'
+show_video_of_model(agent, 'MsPacmanNoFrameskip-v4') # The MsPacman environment was renamed 'MsPacmanNoFrameskip-v4'
 
 def show_video():
     mp4list = glob.glob('*.mp4')
@@ -189,7 +189,10 @@ show_video()
 
 # my stuff down below
 
-videos_folder = 'generated_videos_ALL'
+import time, os
+
+timestamp = time.strftime("%Y%m%d-%H%M%S")
+videos_folder = f'./videos/run_{timestamp}'
 os.makedirs(videos_folder, exist_ok=True)
 
 import glob
@@ -230,12 +233,14 @@ print('\nComputing video episode 0')
 
 for episode in range(0, 5):
     state, _ = env.reset()
-    frames = compute_video_of_model(agent, 'MsPacmanNoFrameskip-v0', frames)
+    frames = compute_video_of_model(agent, 'MsPacmanNoFrameskip-v4', frames)
     video_name = f'video000.mp4'
     complete_path = os.path.join(videos_folder, video_name)
     
 imageio.mimsave(complete_path, frames, fps=30)
 frames = []
+
+print('\nEnd of Computing video episode 0')
 
 for episode in range(1, number_episodes + 1):
   state, _ = env.reset()
@@ -265,7 +270,7 @@ for episode in range(1, number_episodes + 1):
     print('\n Enviroment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(episode - 100, np.mean(scores_on_100_episodes)))
     break
     
-  frames = compute_video_of_model(agent, 'MsPacmanNoFrameskip-v0', frames)
+  frames = compute_video_of_model(agent, 'MsPacmanNoFrameskip-v4', frames)
 
 torch.save(agent.local_qnetwork.state_dict(), 'checkpoint.pth')
 
