@@ -202,7 +202,7 @@ def compute_video_of_model(agent, env_name, frames):
     env = gym.make(env_name, render_mode='rgb_array')
     state, _ = env.reset()
     done = False
-    MAX_FRAMES = 3000
+    #MAX_FRAMES = 3000
     initial_frame_count = len(frames)
     while not done:
         frame = env.render()
@@ -210,8 +210,8 @@ def compute_video_of_model(agent, env_name, frames):
         action = agent.act(state)
         state, reward, done, _, _ = env.step(action.item())
         
-        if len(frames) - initial_frame_count >= MAX_FRAMES:
-            done = True
+        #if len(frames) - initial_frame_count >= MAX_FRAMES:
+        #    done = True
     env.close()
     return frames
 
