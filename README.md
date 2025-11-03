@@ -1,13 +1,6 @@
 # PacMan
 
 Convolutional Newral Network that learns to play PacMan by looking at the image of each frame.
-<<<<<<< HEAD
-whatttt
-||||||| 7734751
-test
-=======
-another-t
->>>>>>> 4201c4048a81ee1080bc2fef0e359c7fd6af368d
 
 
 //IMPORTANT: In initialize.bat, change "set PATH..." to point to the swigwin folder. If not in repo, download the swingin folder from https://swig.org/. 
