@@ -49,7 +49,7 @@ print('Number of actions: ', number_actions)
 
 
 learning_rate = 5e-4            # 0.0005 (that number to get to the bottom of the curve, if it's too great we can miss the sweet spot, if it's too small it could take forever or even stop in a small outcome, it seems this magic number was decided after trial and error)
-minibatch_size = 64            # the number of observations before updating the model's parameters (good usual size)
+minibatch_size = 64             # the number of observations before updating the model's parameters (64 is a good usual size)
 discount_factor = 0.99          # gamma/alpha. small gamma/alpha (0.0001) = short sided (consider only considering current rewards). big gamma/alpha (1) consider future rewards more. For this case, future rewards are important
 
 
@@ -68,7 +68,7 @@ def preprocess_frame(frame):
 class Agent():
 
   def __init__(self, action_size): # creates the 2 neural networks. Also uses a famous optimization method called Adam and saves the the action_size (9). The memory is simplier than the Lunar Lander, only a deque
-    self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # try to use the GPU of NVIDIA. If can't, use CPU
     self.action_size = action_size
     self.local_qnetwork = Network(action_size).to(self.device)
     self.target_qnetwork = Network(action_size).to(self.device)
